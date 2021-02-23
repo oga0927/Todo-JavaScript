@@ -11,3 +11,18 @@ body {
 #wrapper {
   width: 960px;
 }
+
+#tab {
+  margin-bottom: 15px;
+  display: flex;
+}
+
+#tab .tab-list {
+  margin-right: 15px;
+}
+
+#todo-table {
+  width: 100%;
+  /* 境界線の共有 */
+  border-collapse: collapse;
+}

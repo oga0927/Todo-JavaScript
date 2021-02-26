@@ -26,3 +26,75 @@ body {
   /* 境界線の共有 */
   border-collapse: collapse;
 }
+
+#todo-table th {
+  text-align: center;
+}
+
+#todo-table th,
+#todo-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.cell-edit-button {
+  width: 10%;
+}
+
+.cell-text {
+  width: 30%;
+}
+
+.cell-created-at {
+  width: 15%;
+  text-align: center;
+}
+
+.cell-priority {
+  width: 10%;
+  text-align: center;
+}
+
+.cell-done {
+  width: 10%;
+  text-align: center;
+}
+
+#input-form {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #eee;
+  margin-top: 50px;
+}
+
+#input-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#input-form .input-text {
+  width: 60%;
+}
+
+#input-form .input-date {
+  width: 30%;
+}
+
+#input-form .input-text,
+#input-form .input-date {
+  padding: 5px;
+} 
+
+#input-form .input-text input,
+#input-form .input-date input {
+  width: 100%;
+  padding: 10px;
+}
+
+#input-form .submit {
+  padding: 5px;
+  position: relative;
+  top: 8px;
+  font-size: 16px;
+}

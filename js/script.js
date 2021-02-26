@@ -14,4 +14,4 @@ function initialize() {
   registerDom()
 }
 
-document.addEventListener("DOMContentLoaded", initialize.bind(this)
+document.addEventListener("DOMContentLoaded", initialize.bind(this))

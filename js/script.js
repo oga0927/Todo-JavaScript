@@ -10,5 +10,7 @@ function registerDom() {
 
 // 初期化
 function initialize() {
-  registerDom
+  registerDom()
 }
+
+document.addEventListener("DOMContentLorded", initialize.bind(this))

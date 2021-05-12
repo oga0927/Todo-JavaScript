@@ -7,3 +7,8 @@ function registerDom() {
   tabButton = document.querySelector("#tab").querySelectorAll("button")
   sortMenu = document.querySelectorAll("#sort-menu")
 }
+
+// 初期化
+function initialize() {
+  registerDom
+}

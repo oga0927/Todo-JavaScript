@@ -26,8 +26,35 @@ function bindEvents() {
 function handleSubmit(event) {
   // ページ遷移を止める
   event.preventDefault()
+  // 入力文字の代入
   const todoObj = {
     text: inputForm["input-text"].value
   }
+  // 詳細情報の作成
   addTodo(todoObj)
+}
+
+// todoObjを格納する処理
+const todoList = []
+
+function addTodo(todoObj) {
+  // ユニークなID
+  todoObj.id = "todo-" + (todoList.length + 1)
+
+  // 作成日
+  todoObj.createAt = newDate().todoLocalString()
+
+  // 優先度
+  todoObj.primary = 3
+
+  // 完了フラグ
+  todoObj.isDone = false
+
+  // 編集フラグ
+  todoObj.isEdit = false
+
+  // todoList配列の先頭に挿入する
+  todoList.unshift(todoObj)
+
+  
 }

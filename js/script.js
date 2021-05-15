@@ -12,6 +12,7 @@ function registerDom() {
 function initialize() {
   registerDom()
   bindEvents()
+  updateTodoList()
 }
 
 document.addEventListener("DOMContentLorded", initialize.bind(this))
@@ -37,6 +38,7 @@ function handleSubmit(event) {
 // todoObjを格納する処理
 const todoList = []
 
+/* todoの追加処理 */
 function addTodo(todoObj) {
   // ユニークなID
   todoObj.id = "todo-" + (todoList.length + 1)
@@ -56,5 +58,23 @@ function addTodo(todoObj) {
   // todoList配列の先頭に挿入する
   todoList.unshift(todoObj)
 
-  
+  // HTMLを生成する
+  updateTodoList()
+
+  // フォームを初期化する
+  clearInputForm()
 }
+
+/** TodoListの描画を更新する */
+function updateTodoList() {
+  //HTML文字列をプールする変数
+  let htmlStrings = ""
+}
+
+document.querySelector("#button").addEventListener("click", (e) => {
+  if(e.target.dataset.type === "edit") {
+    // 編集中の処理
+  } else {
+    // それ以外の処理
+  }
+})

@@ -1,3 +1,6 @@
+
+// todoObjを格納する処理
+const todoList = []
 let inputForm, todoMain, tabButton,sortMenu
 
 // DOMを変数に登録
@@ -35,8 +38,6 @@ function handleSubmit(event) {
   addTodo(todoObj)
 }
 
-// todoObjを格納する処理
-const todoList = []
 
 /* todoの追加処理 */
 function addTodo(todoObj) {

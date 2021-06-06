@@ -66,7 +66,9 @@ function addTodo(todoObj) {
   clearInputForm()
 }
 
-/** TodoListの描画を更新する */
+
+// READ処理
+TodoListの描画を更新する */
 function updateTodoList() {
   //HTML文字列をプールする変数
   let htmlStrings = ""
@@ -79,5 +81,38 @@ function updateTodoList() {
   })
   todoMain.innerHTML = htmlStrings
 }
+// ここまで
 
 
+// HTML文字列の生成
+
+/**Todo1個単位のHTML文字列を作成する */
+function createTodoHtmlStrings(todo) {
+  // HTMLを文字列をプールする変数
+  let htmlString = ""
+
+  // HTMLのdata属性に設定する編集中を判定する内容
+  const editType = todo.isEdit ? "editFixed" : "edit"
+
+  // ボタンのラベルを編集中かどうかで分岐する
+  const EditButtonLabel = todo.isEdit ? "編集完了" : "編集"
+
+  // HTMLのdata属性に設定する完了したかどうかを判別する内容
+  const doneButtonLabel = todo.isDone ?  "未完了" : "完了"
+
+  // todoテキストが入るテーブルセルHTML文字列をプールする変数
+  let priorityCell = ""
+  
+  // 編集中か、そうでないかで描画するHTMLを分岐する
+  if (todo.isEdit) {
+    // 該当のオブジェクトが編集中の場合はテキストフィールドを描画する
+    // テキストフィールドなのでユーザーは文字や数値を変更できるようになる
+    todoTextCell = 
+    '<td class = "cell-text"<input class= "input-edit" type="text" value=' + todo.text + "/></td>"
+  } else {
+    // 通常時の状態
+    // ユーザーは情報をみるだけなので普通のテキストで表示すればOK!
+    todoTextCell = '<td class="cell-text">' + todo.text + "</td>"
+    priorityCell = '<td class="cell-priority">' + todo.primary + "</td>"
+  }
+}

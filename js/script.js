@@ -70,12 +70,14 @@ function addTodo(todoObj) {
 function updateTodoList() {
   //HTML文字列をプールする変数
   let htmlStrings = ""
+
+  /**HTMLを書き換える */
+  todoList.forEach(todo=> {
+    // 新しいHTMLを出力
+    htmlStrings += createTodoHtmlStrings(todo)
+    todoMain.innerHTML = htmlStrings
+  })
+  todoMain.innerHTML = htmlStrings
 }
 
-document.querySelector("#button").addEventListener("click", (e) => {
-  if(e.target.dataset.type === "edit") {
-    // 編集中の処理
-  } else {
-    // それ以外の処理
-  }
-})
+

@@ -114,5 +114,7 @@ function createTodoHtmlStrings(todo) {
     // ユーザーは情報をみるだけなので普通のテキストで表示すればOK!
     todoTextCell = '<td class="cell-text">' + todo.text + "</td>"
     priorityCell = '<td class="cell-priority">' + todo.primary + "</td>"
+
+    aaa
   }
 }

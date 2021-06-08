@@ -68,7 +68,7 @@ function addTodo(todoObj) {
 
 
 // READ処理
-TodoListの描画を更新する */
+// TodoListの描画を更新する */
 function updateTodoList() {
   //HTML文字列をプールする変数
   let htmlStrings = ""
@@ -95,7 +95,7 @@ function createTodoHtmlStrings(todo) {
   const editType = todo.isEdit ? "editFixed" : "edit"
 
   // ボタンのラベルを編集中かどうかで分岐する
-  const EditButtonLabel = todo.isEdit ? "編集完了" : "編集"
+  const editButtonLabel = todo.isEdit ? "編集完了" : "編集"
 
   // HTMLのdata属性に設定する完了したかどうかを判別する内容
   const doneButtonLabel = todo.isDone ?  "未完了" : "完了"
@@ -113,8 +113,39 @@ function createTodoHtmlStrings(todo) {
     // 通常時の状態
     // ユーザーは情報をみるだけなので普通のテキストで表示すればOK!
     todoTextCell = '<td class="cell-text">' + todo.text + "</td>"
-    priorityCell = '<td class="cell-priority">' + todo.primary + "</td>"
-
-    aaa
+    priorityCell = '<td class="cell-priority">' + todo.priority + "</td>"
   }
+  
+  // Todoオブジェクト１つにつき１行なので、行を生成するtrタグを作る
+  htmlString += '<tr id="' + todo.id + '">'
+
+  // 編集中を判定するための文字列をdata属性に埋め込んでボタンを作る
+  // 非編集中は編集ボタンを編集中は編集完了ボタンとなる
+  htmlString += 
+  '<td class="cell-edit-button"><button data-type="' + editType + '">' + editButtonLabel + "</button></td>"
+
+  // 先に作成したTodoの文字列情報
+  htmlString += todoTextCell
+
+  // Todoリストの作成日
+  htmlString += '<td class="cell-created-at">' + todo.createAt + "</td>"
+
+  // 優先度
+  htmlString += priorityCell
+
+  // 完了ボタンのセルを作る
+  htmlString += '<td class="cell-done">'
+
+  // Todoオブジェクトの完了状態を文字列としてdata属性に埋め込む
+  htmlString += '<button data-type"' + doneType + '">'
+
+  // 完了かそうでないかをボタンのラベルに表示する
+  htmlString += doneButtonLabel
+  htmlString += "</button></td>"
+  htmlString += "</tr>"
+
+  // 作ったHTMLを返す
+  return htmlString
 }
+
+console.log(htmlString);

@@ -1,7 +1,91 @@
-
 // todoObjを格納する処理
 const todoList = []
 let inputForm, todoMain, tabButton,sortMenu
+
+/**Todo1個単位のHTML文字列を作成する */
+function createTodoHtmlStrings(todo) {
+  // HTMLを文字列をプールする変数
+  let htmlString = ""
+
+  // HTMLのdata属性に設定する編集中を判定する内容
+  const editType = todo.isEdit ? "editFixed" : "edit"
+
+  // ボタンのラベルを編集中かどうかで分岐する
+  const editButtonLabel = todo.isEdit ? "編集完了" : "編集"
+
+  // HTMLのdata属性に設定する完了したかどうかを判別する内容
+  const doneButtonLabel = todo.isDone ?  "未完了" : "完了"
+
+  // todoテキストが入るテーブルセルHTML文字列をプールする変数
+  let todoTextCell = ""
+
+  // 優先度テキストが入るテーブルセルHTML文字列をプールする変数
+  let priorityCell = ""
+  
+  // 編集中か、そうでないかで描画するHTMLを分岐する
+  if (todo.isEdit) {
+
+    // 該当のオブジェクトが編集中の場合はテキストフィールドを描画する
+    // テキストフィールドなのでユーザーは文字や数値を変更できるようになる
+    todoTextCell = 
+    '<td class = "cell-text"><input class= "input-edit" type="text" value=' + 
+    todo.text + "/></td>"
+
+    priorityCell = 
+    '<td class="cell-priority"><input class="input-priority" type="number" value=' +
+    todo.priority + 
+    " /></td>"
+  } else {
+
+    // 通常時の状態
+    // ユーザーは情報をみるだけなので普通のテキストで表示すればOK!
+    todoTextCell = '<td class="cell-text">' + todo.text + "</td>"
+    priorityCell = '<td class="cell-priority">' + todo.priority + "</td>"
+  }
+  
+  // Todoオブジェクト１つにつき１行なので、行を生成するtrタグを作る
+  htmlString += '<tr id="' + todo.id + '">'
+
+  // 編集中を判定するための文字列をdata属性に埋め込んでボタンを作る
+  // 非編集中は編集ボタンを編集中は編集完了ボタンとなる
+  htmlString += 
+  '<td class="cell-edit-button"><button data-type="' + editType + '">' + editButtonLabel + "</button></td>"
+
+  // 先に作成したTodoの文字列情報
+  htmlString += todoTextCell
+
+  // Todoリストの作成日
+  htmlString += '<td class="cell-created-at">' + todo.createAt + "</td>"
+
+  // 優先度
+  htmlString += priorityCell
+
+  // 完了ボタンのセルを作る
+  htmlString += '<td class="cell-done">'
+
+  // Todoオブジェクトの完了状態を文字列としてdata属性に埋め込む
+  htmlString += '<button data-type"' + doneType + '">'
+
+  // 完了かそうでないかをボタンのラベルに表示する
+  htmlString += doneButtonLabel
+  htmlString += "</button></td>"
+  htmlString += "</tr>"
+
+  // 作ったHTMLを返す
+  return htmlString
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 // DOMを変数に登録
 function registerDom() {
@@ -88,84 +172,3 @@ function updateTodoList() {
 // ここまで
 
 // HTML文字列の生成
-
-/**Todo1個単位のHTML文字列を作成する */
-function createTodoHtmlStrings(todo) {
-  // HTMLを文字列をプールする変数
-  let htmlString = ""
-
-  // HTMLのdata属性に設定する編集中を判定する内容
-  const editType = todo.isEdit ? "editFixed" : "edit"
-
-  // ボタンのラベルを編集中かどうかで分岐する
-  const editButtonLabel = todo.isEdit ? "編集完了" : "編集"
-
-  // HTMLのdata属性に設定する完了したかどうかを判別する内容
-  const doneButtonLabel = todo.isDone ?  "未完了" : "完了"
-
-  // todoテキストが入るテーブルセルHTML文字列をプールする変数
-  let todoTextCell = ""
-
-  // 優先度テキストが入るテーブルセルHTML文字列をプールする変数
-  let priorityCell = ""
-  
-  // 編集中か、そうでないかで描画するHTMLを分岐する
-  if (todo.isEdit) {
-
-    // 該当のオブジェクトが編集中の場合はテキストフィールドを描画する
-    // テキストフィールドなのでユーザーは文字や数値を変更できるようになる
-    todoTextCell = 
-    '<td class = "cell-text"><input class= "input-edit" type="text" value=' + 
-    todo.text + "/></td>"
-
-    priorityCell = 
-    '<td class="cell-priority"><input class="input-priority" type="number" value=' +
-    todo.priority + 
-    " /></td>"
-  } else {
-
-    // 通常時の状態
-    // ユーザーは情報をみるだけなので普通のテキストで表示すればOK!
-    todoTextCell = '<td class="cell-text">' + todo.text + "</td>"
-    priorityCell = '<td class="cell-priority">' + todo.priority + "</td>"
-  }
-  
-  // Todoオブジェクト１つにつき１行なので、行を生成するtrタグを作る
-  htmlString += '<tr id="' + todo.id + '">'
-
-  // 編集中を判定するための文字列をdata属性に埋め込んでボタンを作る
-  // 非編集中は編集ボタンを編集中は編集完了ボタンとなる
-  htmlString += 
-  '<td class="cell-edit-button"><button data-type="' + editType + '">' + editButtonLabel + "</button></td>"
-
-  // 先に作成したTodoの文字列情報
-  htmlString += todoTextCell
-
-  // Todoリストの作成日
-  htmlString += '<td class="cell-created-at">' + todo.createAt + "</td>"
-
-  // 優先度
-  htmlString += priorityCell
-
-  // 完了ボタンのセルを作る
-  htmlString += '<td class="cell-done">'
-
-  // Todoオブジェクトの完了状態を文字列としてdata属性に埋め込む
-  htmlString += '<button data-type"' + doneType + '">'
-
-  // 完了かそうでないかをボタンのラベルに表示する
-  htmlString += doneButtonLabel
-  htmlString += "</button></td>"
-  htmlString += "</tr>"
-
-  // 作ったHTMLを返す
-  return htmlString
-}
-console.log(createTodoHtmlStrings);
-document.querySelector("#button").addEventListener("click", (e) => {
-  if(e.target.dataset.type === "edit") {
-
-  }else {
-
-  }
-})

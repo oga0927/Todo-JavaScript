@@ -3,7 +3,7 @@ const todoList = []
 let inputForm, todoMain, tabButton,sortMenu
 
 /**Todo1個単位のHTML文字列を作成する */
-function createTodoHtmlStrings(todo) {
+function createTodoHtmlString(todo) {
   // HTMLを文字列をプールする変数
   let htmlString = ""
 
@@ -14,7 +14,10 @@ function createTodoHtmlStrings(todo) {
   const editButtonLabel = todo.isEdit ? "編集完了" : "編集"
 
   // HTMLのdata属性に設定する完了したかどうかを判別する内容
-  const doneButtonLabel = todo.isDone ?  "未完了" : "完了"
+  const doneType = todo.isDone ?  "inbox" : "done"
+
+  // ボタンラベルを未完了か完了かで分岐する
+  const doneButtonLabel = todo.isDone ? "未完了" : "完了"
 
   // todoテキストが入るテーブルセルHTML文字列をプールする変数
   let todoTextCell = ""
@@ -75,56 +78,21 @@ function createTodoHtmlStrings(todo) {
   return htmlString
 }
 
+// READ処理
+// TodoListの描画を更新する */
+function updateTodoList() {
+  //HTML文字列をプールする変数
+  let htmlStrings = ""
 
-
-
-
-
-
-
-
-
-
-
-
-// DOMを変数に登録
-function registerDom() {
-  inputForm = document.querySelector("#input-form")
-  todoMain = document.querySelector("#todo-main")
-  tabButton = document.querySelector("#tab").querySelectorAll("button")
-  sortMenu = document.querySelectorAll("#sort-menu")
+  /**HTMLを書き換える */
+  todoList.forEach(todo=> {
+    // 新しいHTMLを出力
+    htmlStrings += createTodoHtmlStrings(todo)
+    todoMain.innerHTML = htmlStrings
+  })
+  todoMain.innerHTML = htmlStrings
 }
-
-
-
-// 初期化 関数の呼び出し
-function initialize() {
-  registerDom()
-  bindEvents()
-  updateTodoList()
-}
-
-
-
-document.addEventListener("DOMContentLoaded", initialize.bind(this))
-
-// DOMにイベントを設定
-/* フォームタグで登録ボタンをクリックしたらhandle関数を実行せよ */
-function bindEvents() {
-  inputForm.addEventListener("submit", () => handleSubmit())
-}
-
-/* Todoを登録する処理 */
-function handleSubmit(event) {
-
-  // ページ遷移を止める
-  event.preventDefault()
-  const todoObj = {
-    text: inputForm["input-text"].value
-  }
-  // 詳細情報の作成
-  addTodo(todoObj)
-}
+// ここまで
 
 /* todoの追加処理 */
 function addTodo(todoObj) {
@@ -153,22 +121,48 @@ function addTodo(todoObj) {
   clearInputForm()
 }
 
+/* Todoを登録する処理 */
+function handleSubmit(event) {
 
-
-// READ処理
-// TodoListの描画を更新する */
-function updateTodoList() {
-  //HTML文字列をプールする変数
-  let htmlStrings = ""
-
-  /**HTMLを書き換える */
-  todoList.forEach(todo=> {
-    // 新しいHTMLを出力
-    htmlStrings += createTodoHtmlStrings(todo)
-    todoMain.innerHTML = htmlStrings
-  })
-  todoMain.innerHTML = htmlStrings
+  // ページ遷移を止める
+  event.preventDefault()
+  const todoObj = {
+    text: inputForm["input-text"].value
+  }
+  // 詳細情報の作成
+  addTodo(todoObj)
 }
-// ここまで
+
+// DOMを変数に登録
+function registerDom() {
+  inputForm = document.querySelector("#input-form")
+  todoMain = document.querySelector("#todo-main")
+  tabButton = document.querySelector("#tab").querySelectorAll("button")
+  sortMenu = document.querySelectorAll("#sort-menu")
+}
+
+// DOMにイベントを設定
+/* フォームタグで登録ボタンをクリックしたらhandle関数を実行せよ */
+function bindEvents() {
+  inputForm.addEventListener("submit", () => handleSubmit())
+}
+
+
+// 初期化 関数の呼び出し
+function initialize() {
+  registerDom()
+  bindEvents()
+  updateTodoList()
+}
+
+document.addEventListener("DOMContentLoaded", initialize.bind(this))
+
+
+
+
+
+
+
+
 
 // HTML文字列の生成
